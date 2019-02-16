@@ -1,11 +1,16 @@
 {
-  "name": "npm-base",
+  "name": "@waiting/idcard-reader-bp8903",
   "author": "waiting",
   "version": "0.0.1",
-  "description": "npm boilerplate",
+  "description": "南天 BP8903 二代机具读卡",
   "keywords": [
-    "种子项目",
-    "typescript"
+    "ABC",
+    "BP8903",
+    "idcard",
+    "idc-reader",
+    "身份证",
+    "二代身份证",
+    "二代证机具"
   ],
   "engines": {
     "node": ">=8.10.0"
@@ -17,12 +22,12 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bugs": {
-    "url": "https://github.com/waitingsong/npm-base/issues"
+    "url": "https://github.com/waitingsong/node-idcard-reader-bp8903/issues"
   },
-  "homepage": "https://github.com/waitingsong/npm-base#readme",
+  "homepage": "https://github.com/waitingsong/node-idcard-reader-bp8903#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/waitingsong/npm-base.git"
+    "url": "git+https://github.com/waitingsong/node-idcard-reader-bp8903.git"
   },
   "license": "MIT",
   "nyc": {
