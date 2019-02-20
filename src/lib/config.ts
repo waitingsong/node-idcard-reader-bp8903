@@ -1,6 +1,7 @@
 import {
   Config,
   IDData,
+  Options,
 } from '@waiting/idcard-reader-base'
 import {
   join,
@@ -8,6 +9,11 @@ import {
 } from '@waiting/shared-core'
 import { FModel } from 'win32-api'
 
+
+export {
+  IDData,
+  Options,
+}
 
 export const config: Config = {
   appDir: '',  // update by entry point index.js
