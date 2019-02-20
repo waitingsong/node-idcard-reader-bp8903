@@ -31,7 +31,7 @@ describe(filename, () => {
       }
 
       const device = devices[0]
-      const ret = await idcr.read(device).toPromise()
+      const ret = await idcr.read(device)
 
       console.info(ret)
       assert(!! ret, 'IDData invalid')

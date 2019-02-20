@@ -2,6 +2,7 @@ import {
   composite,
   formatBaseData,
   initialDataBase,
+  initialIDData,
   parseCompositeOpts,
   parseDeviceOpts,
   testWrite,
@@ -74,7 +75,7 @@ export async function init(options: Options): Promise<Device[]> {
 }
 
 /** Read card data */
-export function read(device: Device): Observable<IDData> {
+export function read(device: Device): Promise<IDData> {
   if (device.openPort) {
     try {
       disconnectDevice(device)
@@ -92,9 +93,9 @@ export function read(device: Device): Observable<IDData> {
           ? genAvatarPath(device.deviceOpts.imgSaveDir, base.idc)
           : ''
         const ret: IDData = {
+          ...initialIDData,
           base,
-          compositePath: '', // 合成图片
-          imagePath, // 头像
+          imagePath,  // 头像
         }
 
         return ret
@@ -130,7 +131,7 @@ export function read(device: Device): Observable<IDData> {
       }),
     )
 
-    return ret$
+    return ret$.toPromise()
   }
   else {
     throw new Error('设备端口未指定')
