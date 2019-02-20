@@ -42,6 +42,7 @@ export function findDeviceList(
       openPort: 0,
       apib,
     }
+
     const port = connectDevice(device, deviceOpts.port)
     if (port > 0) {
       device.openPort = port
@@ -61,11 +62,12 @@ export function findDeviceList(
         openPort: 0,
         apib,
       }
+
       const port = connectDevice(device, i)
       if (port > 0) {
         device.openPort = port
         device.inUse = true
-        deviceOpts.debug && info(`Found device at serial port: ${i}`)
+        deviceOpts.debug && info(`Found device at serial port: ${port}`)
         disconnectDevice(device)
         arr.push(device)
         if (!deviceOpts.searchAll) {
