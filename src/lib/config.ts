@@ -20,13 +20,6 @@ export const config: Config = {
   tmpDir: join(tmpdir(), 'idcard-reader'),
 }
 
-export const idData: IDData = {
-  base: null, // object
-  imagePath: '',  // image file path
-  // samid: '',  // SAM id
-  compositePath: '',
-}
-
 export const dllFuncs: FModel.DllFuncs = {
   OpenCom: ['int', ['int', 'pointer', 'int', 'int'] ],   // 查找设备端口
   CloseCom: ['int', [] ],
