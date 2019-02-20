@@ -36,17 +36,17 @@ export function findDeviceList(
 
   if (deviceOpts.port > 0) {
     const device: Device = {
-      inUse: false,
+      apib,
       deviceOpts,
       compositeOpts,
+      inUse: false,
       openPort: 0,
-      apib,
     }
 
     const port = connectDevice(device, deviceOpts.port)
     if (port > 0) {
-      device.openPort = port
       device.inUse = true
+      device.openPort = port
       deviceOpts.debug && info(`Found device at serial port: ${port}`)
       disconnectDevice(device)
       arr.push(device)
@@ -56,17 +56,17 @@ export function findDeviceList(
     // 检测串口. bp8903 为串口接口
     for (let i = 1; i <= 16; i++) {
       const device: Device = {
-        inUse: false,
+        apib,
         deviceOpts,
         compositeOpts,
+        inUse: false,
         openPort: 0,
-        apib,
       }
 
       const port = connectDevice(device, i)
       if (port > 0) {
-        device.openPort = port
         device.inUse = true
+        device.openPort = port
         deviceOpts.debug && info(`Found device at serial port: ${port}`)
         disconnectDevice(device)
         arr.push(device)

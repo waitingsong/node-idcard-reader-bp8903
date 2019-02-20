@@ -39,11 +39,11 @@ export interface WltRsModel {
 
 // 读卡设置
 export interface Device {
+  apib: DllFuncsModel
+  // apii: WltRsModel | null
+  deviceOpts: DeviceOpts
+  compositeOpts: CompositeOpts
   /** device in use */
   inUse: boolean
   openPort: number
-  deviceOpts: DeviceOpts
-  compositeOpts: CompositeOpts
-  apib: DllFuncsModel
-  // apii: WltRsModel | null
 }
