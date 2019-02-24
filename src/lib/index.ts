@@ -117,7 +117,7 @@ export function read(device: Device): Promise<IDData> {
       mergeMap(data => {
         return !device.compositeOpts.useComposite || !data.imagePath
           ? of(data)
-          : composite(data, device.compositeOpts).pipe(
+          : composite(data.imagePath, <DataBase> data.base, device.compositeOpts).pipe(
             map(imgPath => {
               data.compositePath = imgPath
               return data
