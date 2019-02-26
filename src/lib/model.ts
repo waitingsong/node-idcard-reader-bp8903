@@ -1,9 +1,11 @@
 import {
-  CompositeOpts, DeviceOpts,
+  Device as DeviceBase,
 } from '@waiting/idcard-reader-base'
+import { FModel as FM } from 'win32-def'
+
 
 /** MantianICRead.dll 接口方法类型 */
-export interface DllFuncsModel {
+export interface DllFuncsModel extends FM.DllFuncsModel {
   /** 查找设备并打开端口 0: 成功 */
   OpenCom(port: number, gate: Buffer, baud: number, timeout: number): number
   CloseCom(): void
@@ -31,19 +33,13 @@ export interface DllFuncsModel {
 }
 
 /** WltRS.dll 接口方法类型 */
-export interface WltRsModel {
-  /** 读取头像照片 */
-  GetBmp(fileName: string, intf: number): number
-}
+// export interface WltRsModel extends FM.DllFuncsModel {
+//   /** 读取头像照片 */
+//   GetBmp(fileName: string, intf: number): number
+// }
 
 
 // 读卡设置
-export interface Device {
+export interface Device extends DeviceBase {
   apib: DllFuncsModel
-  // apii: WltRsModel | null
-  deviceOpts: DeviceOpts
-  compositeOpts: CompositeOpts
-  /** device in use */
-  inUse: boolean
-  openPort: number
 }

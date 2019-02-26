@@ -39,9 +39,6 @@ import { disconnectDevice, findDeviceList, readAll } from './device'
 import { Device } from './model'
 
 
-export * from '@waiting/idcard-reader-base'
-
-
 export async function init(options: Options): Promise<Device[]> {
   const deviceOpts = parseDeviceOpts(options)
   const compositeOpts = parseCompositeOpts(options)

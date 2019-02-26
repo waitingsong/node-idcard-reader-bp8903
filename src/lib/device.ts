@@ -1,11 +1,8 @@
-import {
-  CompositeOpts,
-} from '@waiting/idcard-reader-base'
 import { info } from '@waiting/log'
 import { dirname, normalize } from '@waiting/shared-core'
 import * as iconv from 'iconv-lite'
 
-import { Device, DllFuncsModel } from './model'
+import { Device } from './model'
 
 
 export function connectDevice(device: Device, port: number): number {
@@ -29,46 +26,24 @@ export function disconnectDevice(device: Device): boolean {
 
 export function findDeviceList(
   deviceOpts: Device['deviceOpts'],
-  compositeOpts: CompositeOpts,
-  apib: DllFuncsModel,
+  compositeOpts: Device['compositeOpts'],
+  apib: Device['apib'],
 ): Device[] {
   const arr: Device[] = []
 
   if (deviceOpts.port > 0) {
-    const device: Device = {
-      apib,
-      deviceOpts,
-      compositeOpts,
-      inUse: false,
-      openPort: 0,
-    }
+    const device = findDevice(deviceOpts.port, deviceOpts, compositeOpts, apib)
 
-    const port = connectDevice(device, deviceOpts.port)
-    if (port > 0) {
-      device.inUse = true
-      device.openPort = port
-      deviceOpts.debug && info(`Found device at serial port: ${port}`)
-      disconnectDevice(device)
+    if (device.openPort > 0) {
       arr.push(device)
     }
   }
   else {
     // 检测串口. bp8903 为串口接口
     for (let i = 1; i <= 16; i++) {
-      const device: Device = {
-        apib,
-        deviceOpts,
-        compositeOpts,
-        inUse: false,
-        openPort: 0,
-      }
+      const device = findDevice(i, deviceOpts, compositeOpts, apib)
 
-      const port = connectDevice(device, i)
-      if (port > 0) {
-        device.inUse = true
-        device.openPort = port
-        deviceOpts.debug && info(`Found device at serial port: ${port}`)
-        disconnectDevice(device)
+      if (device.openPort > 0) {
         arr.push(device)
         if (!deviceOpts.searchAll) {
           break
@@ -78,6 +53,32 @@ export function findDeviceList(
   }
 
   return arr
+}
+
+export function findDevice(
+  openPort: Device['openPort'],
+  deviceOpts: Device['deviceOpts'],
+  compositeOpts: Device['compositeOpts'],
+  apib: Device['apib'],
+): Device {
+
+  const device: Device = {
+    apib,
+    deviceOpts,
+    compositeOpts,
+    inUse: false,
+    openPort: 0,
+  }
+
+  const port = connectDevice(device, openPort)
+  if (port > 0) {
+    device.inUse = true
+    device.openPort = port
+    deviceOpts.debug && info(`Found device at serial/usb port: ${port}`)
+    disconnectDevice(device)
+  }
+
+  return device
 }
 
 

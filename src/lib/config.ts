@@ -7,7 +7,7 @@ import {
   join,
   tmpdir,
 } from '@waiting/shared-core'
-import { FModel } from 'win32-api'
+import { FModel as FM } from 'win32-def'
 
 
 export {
@@ -20,7 +20,7 @@ export const config: Config = {
   tmpDir: join(tmpdir(), 'idcard-reader'),
 }
 
-export const dllFuncs: FModel.DllFuncs = {
+export const dllFuncs: FM.DllFuncs = {
   OpenCom: ['int', ['int', 'pointer', 'int', 'int'] ],   // 查找设备端口
   CloseCom: ['int', [] ],
   IDCard_GetInformation: ['int', ['int', 'int', 'pointer', 'int', 'pointer', 'pointer', 'pointer'] ],
