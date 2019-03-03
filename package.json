@@ -57,7 +57,7 @@
     "ffi": "^2.3.0",
     "iconv-lite": "^0.4.24",
     "rxjs": "^6.4.0",
-    "win32-def": "^2.8.0"
+    "win32-def": "^3.2.0"
   },
   "devDependencies": {
     "@types/mocha": "*",
