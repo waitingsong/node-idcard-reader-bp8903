@@ -81,7 +81,9 @@ export function read(device: Device): Promise<IDData> {
       throw ex
     }
 
-    const text$ = of(readAll(device))
+    const text$ = of(readAll(device)).pipe(
+      timeout(2000),
+    )
     const iddata$: Observable<IDData> = text$.pipe(
       retry(device.deviceOpts.findCardRetryTimes),
       map(text => {
