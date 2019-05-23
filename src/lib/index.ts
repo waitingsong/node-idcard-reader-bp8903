@@ -99,7 +99,7 @@ export function read(device: Device): Promise<IDData> {
       }),
     )
     const ret$ = iddata$.pipe(
-      delay(device.compositeOpts.useComposite ? 1000 : 0),
+      delay(device.compositeOpts.useComposite ? 300 : 0),
       tap(() => {
         disconnectDevice(device)
       }),
