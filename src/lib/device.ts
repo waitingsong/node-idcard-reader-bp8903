@@ -29,6 +29,7 @@ export function findDeviceList(
   compositeOpts: Device['compositeOpts'],
   apib: Device['apib'],
 ): Device[] {
+
   const arr: Device[] = []
 
   if (deviceOpts.port > 0) {
